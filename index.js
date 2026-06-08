@@ -17,9 +17,8 @@ function getLCM(a, b) {
     return (a * b) / getGCD(a, b);
 }
 
-// ⚠️ মনে রাখবেন: 'your_email_domain_com' এর জায়গায় আপনার আসল ইমেইলটি বসাবেন।
-// যেমন: sadia_kabir_mouly_gmail_com অথবা shohag_hasan_gmail_com (সব চিহ্ন '_' হবে)
-app.get('/app/shamimhossen2282_gmail_com', (req, res) => {
+
+app.get('/shamimhossen2282_gmail_com', (req, res) => {
     const xRaw = req.query.x;
     const yRaw = req.query.y;
 
