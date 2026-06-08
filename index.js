@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 
-// গসাগু (GCD) বের করার ফাংশন
+// GCD function (Euclidean Algorithm)
 function getGCD(a, b) {
     while (b !== 0) {
         let temp = b;
@@ -12,22 +13,22 @@ function getGCD(a, b) {
     return a;
 }
 
-// লসাগু (LCM) বের করার ফাংশন
+// LCM function (safe integer output)
 function getLCM(a, b) {
-    return (a * b) / getGCD(a, b);
+    return Math.floor((a * b) / getGCD(a, b));
 }
-
 
 app.get('/shamimhossen2282_gmail_com', (req, res) => {
     const xRaw = req.query.x;
     const yRaw = req.query.y;
 
-    // স্বাভাবিক সংখ্যা (Natural Number > 0) কিনা চেক করার লজিক
-    const isNaturalNumber = (str) => typeof str === 'string' && /^\d+$/.test(str) && parseInt(str, 10) > 0;
+    // strict natural number check (>0 integer only)
+    const isNaturalNumber = (v) =>
+        typeof v === 'string' && /^\d+$/.test(v) && parseInt(v, 10) > 0;
 
-    // Plain text রেসপন্স সেট করা (কোনো JSON বা HTML যেন না যায়)
-    res.setHeader('Content-Type', 'text/plain');
+    res.type('text/plain');
 
+    // validation
     if (!isNaturalNumber(xRaw) || !isNaturalNumber(yRaw)) {
         return res.send("NaN");
     }
@@ -37,10 +38,9 @@ app.get('/shamimhossen2282_gmail_com', (req, res) => {
 
     const lcm = getLCM(x, y);
 
-    // লসাগু সংখ্যাটি Plain string হিসেবে পাঠানো হচ্ছে
-    res.send(lcm.toString());
+    return res.send(String(lcm));
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
